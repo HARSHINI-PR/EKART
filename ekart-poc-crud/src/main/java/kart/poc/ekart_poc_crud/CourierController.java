@@ -1,7 +1,5 @@
 package kart.poc.ekart_poc_crud;
 
-
-
 import jakarta.annotation.PostConstruct;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,16 +19,11 @@ public class CourierController {
         couriers.add(new Courier(4, "Harini", "Speaker", "543 Gate", 1896443247578L, 3500.00, "delivered", "Manju"));
         couriers.add(new Courier(5, "Hema", "Lens", "Kallakurichi", 865855545435L, 4000.00, "transit", "Abi"));
       }
-
-
-    // 1. Add new item to deliver
     @PostMapping("/")
     public Courier addCourier(@RequestBody Courier courier) {
         couriers.add(courier);
         return courier;
     }
-
-    // 2. Update itemStatus
     @PutMapping("/")
     public String updateItemStatus(@RequestBody Courier courier) {
         for (Courier existingCourier : couriers) {
@@ -41,8 +34,6 @@ public class CourierController {
         }
         return "Courier not found for " + courier.getParcelId();
     }
-
-    // 3. View items of particular executive
     @GetMapping("/executive/{executiveName}")
     public List<Courier> getByExecutive(@PathVariable String executiveName) {
         List<Courier> result = new ArrayList<>();
@@ -53,8 +44,7 @@ public class CourierController {
         }
         return result;
     }
-
-    // 4. View items of particular address
+    
     @GetMapping("/address/{receiverAddress}")
     public List<Courier> getByAddress(@PathVariable String receiverAddress) {
         List<Courier> result = new ArrayList<>();
@@ -64,9 +54,7 @@ public class CourierController {
             }
         }
         return result;
-    }
-
-    // 5. View items of particular receiver
+    } 
     @GetMapping("/receiver/{receiverName}")
     public List<Courier> getByReceiver(@PathVariable String receiverName) {
         List<Courier> result = new ArrayList<>();
@@ -78,7 +66,6 @@ public class CourierController {
         return result;
     }
 
-    // View all couriers
     @GetMapping("/")
     public List<Courier> getAllCouriers() {
         return couriers;
